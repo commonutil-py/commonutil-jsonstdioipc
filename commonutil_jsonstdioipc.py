@@ -44,7 +44,7 @@ class JSONStandardIOIPC:
 		aux = aux.strip()
 		if not aux:
 			raise _EmptyInputLine
-		if self._line_buf and aux:
+		if self._line_buf:
 			self._line_buf.append(aux)
 			aux = "".join(self._line_buf)
 		total_len = len(aux)
