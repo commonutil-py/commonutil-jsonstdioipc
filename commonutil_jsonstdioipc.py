@@ -8,9 +8,6 @@ from __future__ import annotations
 from typing import Any, Iterator
 import json
 import sys
-import logging
-
-_log = logging.getLogger(__name__)
 
 
 class _EmptyInputLine(Exception):
@@ -38,7 +35,7 @@ class JSONStandardIOIPC:
 		if self._object_buf:
 			return self._object_buf.pop(0)
 		aux = sys.stdin.readline()
-		#_log.debug("read: %r", aux)
+		# _log.debug("read: %r", aux)
 		if not aux:
 			self._eof = True
 		aux = aux.strip()
@@ -76,7 +73,7 @@ class JSONStandardIOIPC:
 
 	def read(self) -> Any:
 		while True:
-			#_log.debug("current line buffer: %r", self._line_buf)
+			# _log.debug("current line buffer: %r", self._line_buf)
 			try:
 				result = self._read()
 				return result
