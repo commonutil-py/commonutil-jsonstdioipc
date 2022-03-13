@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
 		name="commonutil-jsonstdioipc",
-		version="3.0.1",  # REV-CONSTANT:rev 5d022db7d38f580a850cd995e26a6c2f
+		version="3.0.2",  # REV-CONSTANT:rev 5d022db7d38f580a850cd995e26a6c2f
 		description="JSON IPC with Standard Input and Output",
 		py_modules=[
 				"commonutil_jsonstdioipc",
