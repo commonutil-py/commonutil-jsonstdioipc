@@ -5,7 +5,7 @@ Utilities for performing JSON-based IPC with standard input and output.
 
 from __future__ import annotations
 
-from typing import Any, Iterator
+from typing import Any, Iterator, List
 import json
 import sys
 
@@ -16,17 +16,17 @@ class _EmptyInputLine(Exception):
 
 class JSONStandardIOIPC:
 	__slots__ = (
-			'max_line_count',
-			'_line_buf',
-			'_object_buf',
-			'_dec',
-			'_eof',
+		"max_line_count",
+		"_line_buf",
+		"_object_buf",
+		"_dec",
+		"_eof",
 	)
 
 	def __init__(self, max_line_count: int = 128, *args, **kwds) -> None:
 		super().__init__(*args, **kwds)
-		self._line_buf = []
-		self._object_buf = []
+		self._line_buf: List[str] = []
+		self._object_buf: List[Any] = []
 		self.max_line_count = max(1, max_line_count)
 		self._dec = json.JSONDecoder()
 		self._eof = False
@@ -59,8 +59,8 @@ class JSONStandardIOIPC:
 		if self._line_buf:
 			acc_len = 0
 			bound_idx = -1
-			for idx, l in enumerate(self._line_buf):
-				acc_len = acc_len + len(l)
+			for idx, line_text in enumerate(self._line_buf):
+				acc_len = acc_len + len(line_text)
 				if acc_len >= consumed_len:
 					bound_idx = idx + 1
 					break
